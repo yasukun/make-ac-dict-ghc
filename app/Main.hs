@@ -1,10 +1,10 @@
 module Main where
 
 import Lib
+import Data.Maybe
 
-main :: IO ()
+-- main :: IO ()
 main = do
-  -- print $ parseTest
-  -- html <- readFile "../data/target.html"
-  -- print $ parseHTML html
-  print =<< parseURL "https://downloads.haskell.org/~ghc/latest/docs/html/libraries/"
+  n <- parseURL "https://downloads.haskell.org/~ghc/latest/docs/html/libraries/"
+  let (Just n') = n
+  putStrLn $ unlines $ map (\x -> let (LibName y) = x in y) n'
