@@ -28,7 +28,7 @@ executable make-ac-dict-ghc-exe
   build-depends:       base
                      , make-ac-dict-ghc
                      , directory
-
+                     , cmdargs
   default-language:    Haskell2010
 
 test-suite make-ac-dict-ghc-test

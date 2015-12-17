@@ -1,10 +1,21 @@
+{-# LANGUAGE DeriveDataTypeable #-}
 module Main where
 
 import Lib
-import Data.Maybe
+import System.Console.CmdArgs
 
--- main :: IO ()
+data MakeDictArgs = MakeDictArgs {
+      url :: String
+    } deriving (Show, Data, Typeable)
+
+makedictargs = MakeDictArgs
+         {
+           url = "https://downloads.haskell.org/~ghc/latest/docs/html/libraries/" &= args &= typ "String"
+         }
+
+main :: IO ()
 main = do
-  n <- parseURL "https://downloads.haskell.org/~ghc/latest/docs/html/libraries/"
+  opts <- cmdArgs makedictargs
+  n <- parseURL (url opts)
   let (Just n') = n
   putStrLn $ unlines $ map (\x -> let (LibName y) = x in y) n'
